@@ -15,9 +15,8 @@
 - 按需要平均分割线段, 返回运动路径坐标点
 - 识别 **红光点** & **绿光点** 的坐标
 
-![detected.jpg](https://prod-files-secure.s3.us-west-2.amazonaws.com/7f31d7a3-1b0a-4e0b-b5b4-c34a22d93edb/4a586de1-edc6-4834-bbc4-d14002c59a45/detected.jpg)
+![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/f452d1f6-f6a4-49de-9b28-ec84c4b65a4e)
 
-![detected.jpg](https://prod-files-secure.s3.us-west-2.amazonaws.com/7f31d7a3-1b0a-4e0b-b5b4-c34a22d93edb/012d18d4-06a1-4ca8-ba46-109157893fb3/detected.jpg)
 
 相比电赛中常见的 OpenMV 方案, 我们方案比较突出的功能特性有:
 
