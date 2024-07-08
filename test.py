@@ -1,5 +1,6 @@
 import cv2
-import detector
+import quad_detector
+import point_detector
 
 if __name__ == '__main__':
 
@@ -8,24 +9,35 @@ if __name__ == '__main__':
     img = cv2.imread("img/rgb.jpg")
     
     # 初始化四边形检测器
-    quad_detector = detector.QuadDetector()
+    quad = quad_detector.QuadDetector()
 
-    quad_detector.max_perimeter = 99999
-    quad_detector.min_perimeter = 1
-    quad_detector.scale         = 500/600
-    quad_detector.min_angle     = 30
-    quad_detector.line_seg_num  = 6
+    quad.max_perimeter = 99999    # 四边形最大周长上限
+    quad.min_perimeter = 1        # 四边形最小周长下限
+    quad.scale         = 500/600  # 四边形缩放比例 内框 500/600, 靶纸 276/297
+    quad.min_angle     = 30       # 四边形最小角度
+    quad.line_seg_num  = 6        # 四边形线段分割数
 
     # 四边形检测结果
-    vertices, scale_vertices, intersection, points_list = quad_detector.detect(img)
-    img_detected = quad_detector.draw(img)  # 绘制检测结果
+    vertices, scale_vertices, intersection, points_list = quad.detect(img)
+    img_detected = quad.draw(img)  # 绘制检测结果
+
+    print("四边形数据:")
+    print("外框顶点坐标:", quad.vertices)
+    print("内框顶点坐标:", quad.scale_vertices)
+    print("外框中点坐标:", quad.intersection)
+    print("运动路径坐标:", quad.points_list)
+
 
     # 初始化点检测器
-    point_detector = detector.PointDetector()
+    point = point_detector.PointDetector()
 
-    # 点检测结果
-    red_point, green_point = point_detector.detect(img,vertices)
-    img_detected = point_detector.draw(img_detected)  # 绘制检测结果
+    # 点检测结果 (红点坐标, 绿点坐标)
+    point.detect(img,vertices)
+    img_detected = point.draw(img_detected)  # 绘制检测结果
+
+    print("点数据:")
+    print("红点坐标:", point.red_point)
+    print("绿点坐标:", point.green_point)
 
     cv2.imshow("img_src", img)
     cv2.imshow("img_detected", img_detected)

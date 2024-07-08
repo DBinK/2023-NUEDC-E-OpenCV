@@ -7,11 +7,11 @@ import numpy as np
 from flask import Flask, render_template, Response
 from loguru import logger
 
-import detector
+import quad_detector, point_detector
 
 # 创建检测器对象
-quad_detector = detector.QuadDetector(20100, 100, 500/600)
-point_detector = detector.PointDetector()
+quad_detector = quad_detector.QuadDetector(20100, 100, 500/600)
+point_detector = point_detector.PointDetector()
 
 class ThreadedCamera(object):
     """

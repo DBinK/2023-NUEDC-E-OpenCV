@@ -4,13 +4,16 @@ import numpy as np
 import sys
 from loguru import logger
 
-# 设置日志级别为 DEBUG
+# 设置日志级别 
 logger.remove()
-#logger.add(sys.stderr, level="DEBUG")  # 输出到stderr（默认是控制台），级别为DEBUG
-logger.add(sys.stderr, level="INFO")  # 输出到stderr（默认是控制台），级别为DEBUG
+# logger.add(sys.stderr, level="DEBUG") 
+logger.add(sys.stderr, level="INFO")  
 
 
 class QuadDetector:
+    """
+    四边形检测类
+    """
     def __init__(self, max_perimeter=99999, min_perimeter=1, scale=1, min_angle=30, line_seg_num=4):
         """
         @param img: 图像来源
@@ -497,15 +500,21 @@ if __name__ == '__main__':
     
     img = cv2.imread("img/rgb.jpg")
     
-    quad_detector = QuadDetector(21000, 100, 500/600)
+    # 初始化四边形检测器
+    quad_detector = QuadDetector()
+
+    quad_detector.max_perimeter = 99999
+    quad_detector.min_perimeter = 1
+    quad_detector.scale         = 500/600
+    quad_detector.min_angle     = 30
+    quad_detector.line_seg_num  = 6
+
+    # 四边形检测结果
     vertices, scale_vertices, intersection, points_list = quad_detector.detect(img)
-    img_ = quad_detector.draw()
+    img_detected = quad_detector.draw(img)  # 绘制检测结果
 
-    point_detector = PointDetector()
-    red_point, green_point = point_detector.detect(img,vertices)
-    img_ = point_detector.draw(img_)
-
+    # 显示结果
     cv2.imshow("img_src", img)
-    cv2.imshow("img_detected", img_)
-    cv2.imwrite("img/detected.jpg", img_)
+    cv2.imshow("img_detected", img_detected)
+    cv2.imwrite("img/detected.jpg", img_detected)
     cv2.waitKey(0)
