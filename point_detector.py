@@ -77,7 +77,13 @@ class PointDetector:
             # 绿色范围
             lower = np.array([40, 100, 100])
             upper = np.array([80, 255, 255])
-            mask = cv2.inRange(hsv, lower, upper)
+            mask1 = cv2.inRange(hsv, lower, upper)
+
+            lower = np.array([0, 0, 200])
+            upper = np.array([180, 30, 255])
+            mask2 = cv2.inRange(hsv, lower, upper)
+        
+            mask = mask1 | mask2
 
             return find_max_contours(mask)
         
@@ -103,13 +109,13 @@ class PointDetector:
             yellow_point = find_yellow_point(hsv)
             red_point    = yellow_point
             green_point  = yellow_point
-            logger.info("红绿光重叠, 找黄光")
+            logger.debug("红绿光重叠, 找黄光")
 
             if yellow_point[0] == 0:
                 white_point = find_white_point(hsv)
                 red_point   = white_point
                 green_point = white_point
-                logger.info("黄光找不到, 找白光")
+                logger.debug("黄光找不到, 找白光")
 
         logger.info(f"red_point: {red_point[4], red_point[5]} | green_point: {green_point[4], green_point[5]}")
 

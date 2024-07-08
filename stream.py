@@ -10,7 +10,8 @@ from loguru import logger
 import quad_detector, point_detector
 
 # 创建检测器对象
-quad_detector = quad_detector.QuadDetector(20100, 100, 500/600)
+# quad_detector = quad_detector.QuadDetector(9000, 100, 500/600, 5, 8)
+quad_detector  = quad_detector.QuadDetector(1000, 1, 276/297, 5, 8)
 point_detector = point_detector.PointDetector()
 
 class ThreadedCamera(object):
@@ -61,7 +62,7 @@ class ThreadedCamera(object):
 
         try:
             # 获取 红点 和 绿点 的坐标
-            red_point, green_point = point_detector.detect(frame, quad_detector.vertices)
+            red_point, green_point = point_detector.detect(frame) #, quad_detector.vertices)
             frame_drawed = point_detector.draw(frame_drawed)     
         
         except Exception as e:
