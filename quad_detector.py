@@ -222,8 +222,8 @@ class QuadDetector:
             points_list = []
             
             for i in range(N+1):
-                x = point1[0] + delta_x * i
-                y = point1[1] + delta_y * i
+                x = int(point1[0] + delta_x * i)
+                y = int(point1[1] + delta_y * i)
                 points_list.append([x, y])
             
             return points_list

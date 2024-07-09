@@ -18,7 +18,7 @@ if __name__ == '__main__':
     quad.line_seg_num  = 6        # 四边形线段分割数
 
     # 四边形检测结果
-    vertices, scale_vertices, intersection, points_list = quad.detect(img)
+    quad.detect(img)
     img_detected = quad.draw(img)  # 绘制检测结果
 
     print("四边形数据:")
@@ -27,12 +27,11 @@ if __name__ == '__main__':
     print("外框中点坐标:", quad.intersection)
     print("运动路径坐标:", quad.points_list)
 
-
     # 初始化点检测器
     point = point_detector.PointDetector()
 
     # 点检测结果 (红点坐标, 绿点坐标)
-    point.detect(img,vertices)
+    point.detect(img, quad.vertices)  # 当传入 vertices 参数时, 会进行roi切割, 只检测四边形内的红绿点
     img_detected = point.draw(img_detected)  # 绘制检测结果
 
     print("点数据:")

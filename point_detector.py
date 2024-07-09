@@ -77,14 +77,8 @@ class PointDetector:
             # 绿色范围
             lower = np.array([40, 100, 100])
             upper = np.array([80, 255, 255])
-            mask1 = cv2.inRange(hsv, lower, upper)
-
-            lower = np.array([0, 0, 200])
-            upper = np.array([180, 30, 255])
-            mask2 = cv2.inRange(hsv, lower, upper)
-        
-            mask = mask1 | mask2
-
+            mask = cv2.inRange(hsv, lower, upper)
+            
             return find_max_contours(mask)
         
         def find_yellow_point(hsv):
