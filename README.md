@@ -49,7 +49,11 @@ https://www.walnutpi.com/docs/category/opencv
 
 根据题目要求, 我们需要识别 600mm^2 的白板上 1mm 细线围成的 500mm^2 四边形 **四个顶点**和**中心点**的坐标, 识别靶纸**黑框**的一些位置信息, 然后控制红绿激光点在这些坐标之间移动, 所以我们还需要识别 **红光点** & **绿光点** 在白板上的坐标, 以实现对光点的闭环控制
 
-对于白板上 1mm 的细线, 如果想要直接通过它来识别四边形, 即使距离只有 1m , 依然对摄像头要求极高, 常规摄像头采到的画面里, 通常不是一条条连续的线。因此, 我们决定转变思路, 白板和大框的大小都是固定的, 既然细线识别不到, 但白板边框 (下文简称**外框**) 的特征还是很明显的, 我们可以通过识别白板边框围成的四边形, 缩小一圈, 得到缩小后的四边形坐标, 即为1mm 细线四边形四个顶点的坐标 (下文简称**内框**)。与此同时, 我们也可以对靶纸外边框也可以做一样的操作, 来得到**黑框**的中心线围成的四边形**四个顶点**坐标
+对于白板上 1mm 的细线, 如果想要直接通过它来识别四边形, 即使距离只有 1m , 依然对摄像头要求极高, 常规摄像头采到的画面里, 通常不是一条条连续的线。
+![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/d5eb8cd8-84ad-4755-abbb-d262b73c9bbf)
+
+因此, 我们可以转变思路, 白板和大框的大小都是固定的, 既然细线识别不到, 但白板边框 (下文简称**外框**) 的特征还是很明显的, 我们可以通过识别白板边框围成的四边形, 缩小一圈, 得到缩小后的四边形坐标, 即为1mm 细线四边形四个顶点的坐标 (下文简称**内框**)。与此同时, 我们也可以对靶纸外边框也可以做一样的操作, 来得到**黑框**的中心线围成的四边形**四个顶点**坐标
+![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/f020363b-c513-4c64-8718-5a8fc84c2a88)
 
 至此, 我们只用一个算法, 完成了两个需要的四边形顶点坐标识别!
 
@@ -58,12 +62,14 @@ https://www.walnutpi.com/docs/category/opencv
 **理论存在, 实践开始!**
 
 **找四边形**: 采集图像 → 灰度化 → 找边缘 → 找轮廓 → 从轮廓中筛选最大允许周长的四边形 → 得到顶点坐标
+![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/848c565c-a7d4-4d36-9822-99b5f08af13c)
 
 **缩小一圈**: → 从顶点坐标把白板拉直到铺满屏幕, 计算透视变换矩阵
 
 → 从缩小比例 (内框是 500mm / 600mm) 把坐标缩小一圈 , 得到小一圈的顶点坐标(临时)
 
 → 把小一圈的顶点坐标, 乘以透视变换矩阵的逆矩阵, 变换回原来的坐标系, 得到内框顶点坐标
+![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/e81af574-d262-47a8-99ca-58a52a6a79ff)
 
 至此, 我们最难的识别部分就完成了。上述算法在 OpenCV 都有现成的函数, 可以尝试自己实现一次来上手 OpenCV, 这一部分的源码都放在`quad_detector.py` 中
 
@@ -160,7 +166,7 @@ if __name__ == '__main__':
     quad.line_seg_num  = 6        # 四边形线段分割数
 
     # 四边形检测结果
-    vertices, scale_vertices, intersection, points_list = quad.detect(img)
+    quad.detect(img)
     img_detected = quad.draw(img)  # 绘制检测结果
 
     print("四边形数据:")
@@ -173,7 +179,7 @@ if __name__ == '__main__':
     point = point_detector.PointDetector()
 
     # 点检测结果 (红点坐标, 绿点坐标)
-    point.detect(img,vertices)
+    point.detect(img, quad.vertices)  # 当传入 vertices 参数时, 会进行roi切割, 只检测四边形内的红绿点
     img_detected = point.draw(img_detected)  # 绘制检测结果
 
     print("点数据:")
