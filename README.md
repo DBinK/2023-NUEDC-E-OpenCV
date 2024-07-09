@@ -19,13 +19,17 @@
 - 按需要平均分割线段, 返回运动路径坐标点
 - 识别 **红光点** & **绿光点** 的坐标
 
-![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/f452d1f6-f6a4-49de-9b28-ec84c4b65a4e)
+![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/e0abc2b8-3e58-44b9-8bb0-96b43ea46e44)
+![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/0d16f1fb-72e7-4a44-b843-a587f98745f2)
+![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/d6f5290c-2d6d-48ab-a2a9-37bfc169910c)
+
+
 
 相比电赛中常见的 OpenMV 方案, 我们方案比较突出的功能特性有:
 
 - **低成本**
     - 任意百元级 Linux 开发板就能跑, 相比 OpenMV 类方案便宜太多
-    - 本项目使用的是一款国产派: 核桃派 ZeroW, 搭载全志 618 芯片, 1G RAM已经足够用。 这款核桃派在官方淘宝店买全新只需要 **109** 元, 相比之下, 最便宜的 OpenMV 开发板如 K210 都要 **250** 元左右
+    - 本项目使用的是一款国产派: 核桃派 ZeroW, 搭载全志 618 芯片, 1G RAM , 这样的硬件配置已经完全够用。 这款核桃派在官方淘宝店买全新只需要 **109** 元, 相比之下, 最便宜的 OpenMV 开发板如 K210 都要 **250** 元左右
 - **高性能**
     - 检测识别延迟平均在 0.03 s 左右, 每秒能跑个40~60帧, 相比 OpenMV 快非常多!
     - 图传显示延迟平均在 0.24 s 左右, 图传只是方便调试, 关闭后检测延迟更低
