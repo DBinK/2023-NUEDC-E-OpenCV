@@ -17,7 +17,7 @@ if __name__ == '__main__':
     quad.min_angle     = 30       # 四边形最小角度
     quad.line_seg_num  = 6        # 四边形线段分割数
 
-    # 四边形检测结果
+    # 四边形检测
     quad.detect(img)
     img_detected = quad.draw(img)  # 绘制检测结果
 
@@ -30,8 +30,9 @@ if __name__ == '__main__':
     # 初始化点检测器
     point = point_detector.PointDetector()
 
-    # 点检测结果 (红点坐标, 绿点坐标)
-    point.detect(img, quad.vertices)  # 当传入 vertices 参数时, 会进行roi切割, 只检测四边形内的红绿点
+    # 点检测 (红点坐标, 绿点坐标)
+    # 当传入 vertices 参数时, 会进行roi切割, 只检测四边形内的红绿点
+    point.detect(img, quad.vertices)  
     img_detected = point.draw(img_detected)  # 绘制检测结果
 
     print("点数据:")
