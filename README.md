@@ -18,11 +18,11 @@
 - 识别靶纸**黑框**的中心线围成的四边形**四个顶点**坐标 (近似)
 - 按需要平均分割线段, 返回运动路径坐标点
 - 识别 **红光点** & **绿光点** 的坐标
+- 一套图传系统, 可在浏览器显示检测画面
 
 ![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/e0abc2b8-3e58-44b9-8bb0-96b43ea46e44)
 ![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/0d16f1fb-72e7-4a44-b843-a587f98745f2)
 ![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/d6f5290c-2d6d-48ab-a2a9-37bfc169910c)
-
 
 
 相比电赛中常见的 OpenMV 方案, 我们方案比较突出的功能特性有:
