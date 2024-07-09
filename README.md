@@ -3,7 +3,7 @@
 
 基于 **核桃派 ZeroW** 的 低成本 高性能 低延迟 OpenCV 2023电赛E题 图像检测方案
 
-视频演示: 
+视频演示: 待补充
 
 本项目仅包含图像识别检测部分, 各项功能基本都用面向对象的方式封装好了, 非常便于第三方调用, 控制部分可基于与本项目进一步开发
 
@@ -21,13 +21,18 @@ https://www.walnutpi.com/docs/category/opencv
 - 识别 **红光点** & **绿光点** 的坐标
 - 一套图传系统, 可在浏览器显示检测画面
 
-识别细线大框:
+---
+
+**识别细线大框:**
+
 ![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/e0abc2b8-3e58-44b9-8bb0-96b43ea46e44)
 
-识别靶纸:
+**识别靶纸:**
+
 ![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/0d16f1fb-72e7-4a44-b843-a587f98745f2)
 
-透视形变:
+**透视形变:**
+
 ![image](https://github.com/DBinK/2023-NUEDC-E-OpenCV/assets/21201676/d6f5290c-2d6d-48ab-a2a9-37bfc169910c)
 
 ---
